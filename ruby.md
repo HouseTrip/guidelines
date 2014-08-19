@@ -1382,7 +1382,7 @@ mutators.
 * Avoid public accessors unless necessary for your class to be usable.
   More than a couple of accessors is a smell your class is exposing too much.
 
-* Avoid referencing instance variables directly. Prefer an accessor: it makes the object easier to use in tests, and its implementation becomes less brittle, as it makes it easier to achieve a bahavioural change.
+* Avoid referencing instance variables directly. Prefer an accessor: it makes the object easier to use in tests, and its implementation becomes less brittle, as it makes it easier to achieve a behavioural change.
 
 * Keep the accessor private unless a public one is needed.
 
