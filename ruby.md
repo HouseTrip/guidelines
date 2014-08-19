@@ -1382,31 +1382,24 @@ mutators.
 * Avoid public accessors unless necessary for your class to be usable.
   More than a couple of accessors is a smell your class is exposing too much.
 
-* Do not use private accessors. Use state variables, as it makes it easier to
-  detect overuse of object state between methods.
+* Avoid referencing instance variables directly. Prefer an accessor: it makes the object easier to use in tests, and its implementation becomes less brittle, as it makes it easier to achieve a bahavioural change.
+
+* Keep the accessor private unless a public one is needed.
 
     ```Ruby
     # good
-    def initialize(options = {})
-      @foo = options.fetch(:foo)
+    def initialize(dependency)
+      @dependency = dependency
     end
 
-    def run
-      @foo.reverse
-    end
-
-    # bad
-    def initialize(options = {})
-      @foo = options.fetch(:foo)
-    end
-
-    def run
-      foo.reverse
-    end
+    def other_method; end
 
     private
-    attr_reader :foo
+
+    attr_reader :dependency
     ```
+
+* As a corollary of the above: when your object needs a collaborator, use dependency injection liberally.
 
 * Consider using `Struct.new`, which defines the trivial accessors,
 constructor and comparison operators for you.
@@ -1591,7 +1584,7 @@ in *Ruby* now, not in *Python*.
   ```
 
   In the example `do_this` and `do_that` both modify the same instance
-  variable `@stuff` to produce the result of `def stuff`. 
+  variable `@stuff` to produce the result of `def stuff`.
   The same result can be achieved in the "good" variant without any instance
   variable.
 
@@ -1888,7 +1881,7 @@ this rule only to arrays with two or more elements.
 
    ```Ruby
    batman = {name: 'Bruce Wayne'}
-   
+
    # bad - if we use the default value, we eager evaluate it
    # so it can slow the program down if done multiple times
    batman.fetch(:powers, get_batman_powers) # get_batman_powers is expensive
