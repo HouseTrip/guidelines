@@ -1392,7 +1392,15 @@ Most of the rest of this guide applies to CoffeeScript too, so please do follow 
 
 ## <a name="selector">Selector</a>
 
-Prefix all javascript-based selectors with `js-`. This is taken from slightly obtrusive javascript. The idea is that you should be able to tell a presentational class from a functional class.
+Use the HTML5 `data-js` attribute to add js behaviour to an element. This helps seperate behaviour layer from the presentation and content layers of the app
+
+```haml
+// bad
+.js-map-canvas.map-canvas
+
+// good
+.map-canvas{ :data-js => "initalize-map"}
+```
 
 **[[⬆]](#TOC)**
 
