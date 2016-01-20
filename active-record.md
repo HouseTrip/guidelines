@@ -165,12 +165,19 @@ If that isn't enough: precalculate, use caching, and **do your math in Ruby**. Y
 
 Rule of thumb: if you're not certain how many records your query will retrieve, eventually it's going to retreive too many and you'll blow up your machine's memory (known as _swapping_).
 
-Alway **paginate or limit** unless domain knowledge tells you clearly you don't have to.
+Always **paginate or limit** unless domain knowledge tells you clearly you don't have to.
+
+**But be aware** that when using `paginate` it does a `SELECT COUNT(*) ...` which can be very expensive in a table with many records, instead use `offset` and `limit`. 
 
 Good:
 
-    User.paginate(page:1, per_page:10)
-    User.limit(10)
+```ruby
+    User.offset((page - 1) * limit).limit(limit)
+    # or 
+    User.paginate(page: page, per_page: limit)
+    # or
+    User.limit(limit)
+```
     
 Fine:
 
