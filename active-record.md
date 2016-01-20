@@ -171,9 +171,13 @@ Always **paginate or limit** unless domain knowledge tells you clearly you don't
 
 Good:
 
+```ruby
     User.offset((page - 1) * limit).limit(limit)
-    User.paginate(page:1, per_page:10)
-    User.limit(10)
+    # or 
+    User.paginate(page: page, per_page: limit)
+    # or
+    User.limit(limit)
+```
     
 Fine:
 
