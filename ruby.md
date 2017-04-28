@@ -349,11 +349,10 @@ Translations of the guide are available in the following languages:
     # good (normal indent)
     def send_mail(source)
       Mailer.deliver(
-        to: 'bob@example.com',
-        from: 'us@example.com',
+        to:      'bob@example.com',
+        from:    'us@example.com',
         subject: 'Important message',
-        body: source.text
-      )
+        body:    source.text)
     end
     ```
 
