@@ -249,7 +249,8 @@ It was decided not to override `present?` and `blank?`.
 
 ## Shared examples
 
-TBD
+Do NOT use them. They make things DRY but the cost is too high. If it fails it makes things much more difficult to debug, and the error messages can be confusing.
+Also when used across files, it is less readable and making them reusable can become a challenge very fast.
 
 ## Custom matchers
 
